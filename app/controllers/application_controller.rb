@@ -1,5 +1,3 @@
 class ApplicationController < ActionController::Base
-    def index
-        @userparams = params[:username]
-    end
+   include ErrorHandling
 end
