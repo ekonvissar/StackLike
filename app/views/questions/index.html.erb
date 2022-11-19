@@ -2,8 +2,8 @@
 <% currently_at 'Questions' %>
 
 <h1 class='mb-4'>Questions</h1>
-<%= link_to 'New question', new_question_path, class: 'btn btn-primaty '%>
-<%= paginate @questions %>
+<%= link_to 'New question', new_question_path, class: 'btn btn-primary btn-lg mb-3'%>
+<%== pagy_bootstrap_nav @pagy %>
 <% @questions.each do |question| %>
   <article class="card mt-3">
     <div class="card-body">
@@ -26,4 +26,4 @@
     </div>
   </article>
 <% end %>
-<%= paginate @questions %>
+<%== pagy_bootstrap_nav @pagy %>
