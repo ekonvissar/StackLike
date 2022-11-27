@@ -26,8 +26,8 @@
 
   
 <h2 class="mt-5">Answers</h2>
-<%== pagy_bootstrap_nav @pagy %>
+<%= pagination @pagy %>
 <%= render partial: "answers/answer", collection: @answers, as: :answer, locals: {question: @question} %>
 <% @answers.each do |answer| %>
 <% end %>
-<%== pagy_bootstrap_nav @pagy %>
+<%= pagination @pagy %>
