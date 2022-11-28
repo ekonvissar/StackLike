@@ -26,7 +26,7 @@ module ApplicationHelper
     end
 
     def full_title(page_title = "")
-        base_title = "AskIt"
+        base_title = "StackLike"
         if page_title.present?
             "#{page_title} | #{base_title}"
         else
