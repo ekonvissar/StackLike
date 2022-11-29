@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
 class QuestionsController < ApplicationController
   before_action :set_question!, only: %i[show destroy edit update]
+
+  def index
+    @pagy, @questions = pagy Question.order(created_at: :desc)
+    @questions = @questions.decorate
+  end
 
   def show
     @question = @question.decorate
@@ -8,41 +15,35 @@ class QuestionsController < ApplicationController
     @answers = @answers.decorate
   end
 
-  def destroy
-    @question.destroy 
-    flash[:success]='Question deleted!'
-    redirect_to questions_path 
+  def new
+    @question = Question.new
   end
-  
-  def edit
+
+  def edit; end
+
+  def create
+    @question = Question.new question_params
+    if @question.save
+      flash[:success] = 'Question created!'
+      redirect_to questions_path
+    else
+      render :new
+    end
   end
 
   def update
     if @question.update question_params
-      flash[:success]='Question updated!'
+      flash[:success] = 'Question updated!'
       redirect_to questions_path
     else
       render :edit
     end
   end
 
-  def index
-    @pagy, @questions = pagy Question.order(created_at: :desc)
-    @questions = @questions.decorate
-  end
-
-  def new
-    @question = Question.new
-  end
-
-  def create
-    @question = Question.new question_params
-    if @question.save
-      flash[:success]='Question created!'
-      redirect_to questions_path
-    else
-      render :new
-    end
+  def destroy
+    @question.destroy
+    flash[:success] = 'Question deleted!'
+    redirect_to questions_path
   end
 
   private
@@ -52,6 +53,6 @@ class QuestionsController < ApplicationController
   end
 
   def set_question!
-    @question = Question.find params[:id]  
+    @question = Question.find params[:id]
   end
 end

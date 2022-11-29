@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   include ErrorHandling
   include Authentication
 
   private
-  
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]).decorate if session[:user_id].present?
   end
